@@ -33,7 +33,6 @@ export default defineConfig({
 const HIGHLIGHTS = [
   "Declarative config with full TypeScript support",
   "Composable plugin system — add only what you need",
-  "Template variables & dynamic file paths",
   "Works with npm, pnpm, yarn, and bun",
 ];
 
@@ -48,7 +47,7 @@ export default function ConfigShowcase(): ReactNode {
           <p className={styles.sectionText}>
             A single <code>cngpac.config.ts</code> file defines your entire
             release pipeline — changelog generation, npm publishing, GitHub
-            releases, and formatting.
+            releases, or anything else you can imagine.
           </p>
           <ul className={styles.highlights}>
             {HIGHLIGHTS.map((h) => (
