@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2024"],
+    "rootDir": "..",
+    "types": ["node"],
+    "declaration": true,
+    "sourceMap": false,
+    "declarationMap": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "cngpac": ["../"]
+    }
+  },
+  "include": ["index.ts", "./commands/*.ts"]
+}

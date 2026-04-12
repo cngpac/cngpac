@@ -1,0 +1,120 @@
+/* ── Features Section ── */
+
+.section {
+  padding: 80px 0;
+  background: var(--uno-bg);
+  position: relative;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--uno-text);
+  margin-bottom: 12px;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--uno-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 56px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Feature card ── */
+.card {
+  position: relative;
+  padding: 32px 24px 28px;
+  border-radius: var(--uno-radius-lg);
+  background: var(--uno-surface);
+  border: 1px solid var(--uno-border);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--uno-accent), transparent 50%, var(--uno-accent-blue));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: var(--uno-surface-hover);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    var(--uno-glow-teal);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.cardIcon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+  line-height: 1;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--uno-text);
+  margin-bottom: 8px;
+}
+
+.cardDescription {
+  font-size: 0.88rem;
+  color: var(--uno-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 996px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .section {
+    padding: 60px 0;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}

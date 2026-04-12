@@ -1,0 +1,228 @@
+/**
+ * Homepage styles — Cngpac
+ */
+
+/* ── Hero ── */
+.hero {
+  background: var(--uno-gradient-hero);
+  padding: 100px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle radial glow behind hero */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 212, 170, 0.08) 0%,
+    rgba(59, 130, 246, 0.04) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--uno-text) 0%,
+    var(--uno-accent) 50%,
+    var(--uno-accent-blue) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroTagline {
+  font-size: 1.25rem;
+  color: var(--uno-text-muted);
+  margin-bottom: 36px;
+  line-height: 1.5;
+}
+
+/* ── Install command ── */
+.installBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--uno-surface);
+  border: 1px solid var(--uno-border);
+  border-radius: var(--uno-radius);
+  padding: 12px 20px;
+  margin-bottom: 32px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.installBox:hover {
+  border-color: var(--uno-accent);
+  box-shadow: var(--uno-glow-teal);
+}
+
+.installPrompt {
+  color: var(--uno-text-dim);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+.installCmd {
+  color: var(--uno-accent);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.installCopy {
+  color: var(--uno-text-dim);
+  font-size: 0.8rem;
+  margin-left: 4px;
+  transition: color 0.2s ease;
+}
+
+.installBox:hover .installCopy {
+  color: var(--uno-accent);
+}
+
+/* ── CTA buttons ── */
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--uno-radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  background: var(--uno-gradient-primary);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--uno-glow-teal);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--uno-radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  background: transparent;
+  color: var(--uno-text);
+  border: 1px solid var(--uno-border-bright);
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--uno-text-muted);
+  color: var(--uno-text);
+  text-decoration: none;
+}
+
+/* ── CTA bottom section ── */
+.cta {
+  padding: 80px 0 100px;
+  text-align: center;
+  background: var(--uno-bg);
+  position: relative;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  z-index: 1;
+}
+
+.ctaTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--uno-text);
+  margin-bottom: 12px;
+}
+
+.ctaText {
+  font-size: 1.05rem;
+  color: var(--uno-text-muted);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 72px 0 60px;
+  }
+
+  .heroTitle {
+    font-size: 2.4rem;
+  }
+
+  .heroTagline {
+    font-size: 1.05rem;
+  }
+
+  .installBox {
+    padding: 10px 16px;
+  }
+
+  .cta {
+    padding: 60px 0 80px;
+  }
+
+  .ctaTitle {
+    font-size: 1.7rem;
+  }
+}

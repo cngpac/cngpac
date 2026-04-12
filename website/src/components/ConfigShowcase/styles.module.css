@@ -1,0 +1,158 @@
+/* ── Config Showcase Section ── */
+
+.section {
+  padding: 80px 0;
+  background: var(--uno-bg-deep);
+  position: relative;
+}
+
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* ── Left: description ── */
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--uno-text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.sectionText {
+  font-size: 0.95rem;
+  color: var(--uno-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--uno-text);
+}
+
+.highlightDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--uno-accent);
+  flex-shrink: 0;
+}
+
+/* ── Right: code block ── */
+.codeWrapper {
+  position: relative;
+  border-radius: var(--uno-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--uno-border);
+  background: var(--uno-surface);
+}
+
+/* Gradient accent at the top */
+.codeWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--uno-gradient-primary);
+}
+
+.codeHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--uno-border);
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.codeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.codeDotRed {
+  background: #f85149;
+}
+
+.codeDotYellow {
+  background: #d29922;
+}
+
+.codeDotGreen {
+  background: #3fb950;
+}
+
+.codeFileName {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  color: var(--uno-text-muted);
+  margin-left: 4px;
+}
+
+.codeBody {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.codeBody pre {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.codeBody code {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .sectionText {
+    text-align: center;
+  }
+
+  .highlights {
+    align-items: center;
+  }
+}

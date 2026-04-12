@@ -1,0 +1,97 @@
+/**
+ * Cngpac — Custom theme overrides
+ * Uses Docusaurus default green aesthetics while maintaining custom UI improvements
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ── Base palette (Light) ── */
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* ── Cngpac tokens (Light mode) ── */
+  --uno-bg-deep: #f5f6f8;
+  --uno-bg: #ffffff;
+  --uno-surface: #ffffff;
+  --uno-surface-hover: #f1f2f5;
+  --uno-border: #e2e8f0;
+  --uno-border-bright: #cbd5e1;
+  --uno-text: #1c1e21;
+  --uno-text-muted: #64748b;
+  --uno-text-dim: #94a3b8;
+  --uno-accent: var(--ifm-color-primary);
+  --uno-accent-blue: #3b82f6;
+  --uno-accent-purple: #8b5cf6;
+  --uno-accent-pink: #ec4899;
+  --uno-accent-amber: #f59e0b;
+  --uno-gradient-primary: linear-gradient(135deg, var(--ifm-color-primary) 0%, #1a5632 100%);
+  --uno-gradient-hero: linear-gradient(160deg, #ffffff 0%, #f1f5f9 40%, #e2e8f0 100%);
+  --uno-glow-teal: 0 0 40px rgba(46, 133, 85, 0.15);
+  --uno-glow-blue: 0 0 40px rgba(59, 130, 246, 0.15);
+  --uno-radius: 12px;
+  --uno-radius-lg: 16px;
+
+  /* ── Typography ── */
+  --ifm-font-family-base:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ifm-font-family-monospace:
+    "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  --ifm-heading-font-weight: 700;
+}
+
+[data-theme="dark"] {
+  /* ── Base palette (Dark) ── */
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  /* ── Cngpac tokens (Dark mode) ── */
+  --uno-bg-deep: #18191a;
+  --uno-bg: #1b1b1d;
+  --uno-surface: #242526;
+  --uno-surface-hover: #303133;
+  --uno-border: #3e4042;
+  --uno-border-bright: #4b4d4f;
+  --uno-text: #e3e3e3;
+  --uno-text-muted: #a2a5a9;
+  --uno-text-dim: #8b8e91;
+  --uno-accent: var(--ifm-color-primary);
+  --uno-gradient-primary: linear-gradient(135deg, var(--ifm-color-primary) 0%, #1fa588 100%);
+  --uno-gradient-hero: linear-gradient(160deg, #18191a 0%, #1b1b1d 40%, #121212 100%);
+  --uno-glow-teal: 0 0 40px rgba(37, 194, 160, 0.15);
+
+  --ifm-background-color: var(--uno-bg);
+  --ifm-navbar-background-color: rgba(24, 25, 26, 0.85); /* Slightly translucent */
+  --ifm-footer-background-color: var(--uno-bg-deep);
+}
+
+/* ── Global smoothing ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Navbar glass effect in dark mode ── */
+[data-theme="dark"] .navbar {
+  backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(62, 64, 66, 0.5);
+}
+
+/* ── Footer refinements ── */
+[data-theme="dark"] .footer {
+  border-top: 1px solid var(--uno-border);
+}

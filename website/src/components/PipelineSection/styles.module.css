@@ -1,0 +1,384 @@
+/* ── Pipeline Section (Vertical Layout) ── */
+
+.section {
+  padding: 80px 0 100px;
+  background: var(--uno-bg-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle grid background */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, var(--uno-border) 1px, transparent 0);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--uno-text);
+  margin-bottom: 12px;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--uno-text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 60px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Main pipeline track ── */
+.pipelineTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Phase group ── */
+.phaseGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.phaseLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.phaseLabelSetup {
+  color: var(--uno-text-muted);
+  background: var(--uno-bg);
+  border: 1px solid var(--uno-border);
+}
+
+.phaseLabelDev {
+  color: var(--uno-accent);
+  background: var(--uno-bg);
+  border: 1px solid var(--uno-border);
+}
+
+.phaseLabelPrep {
+  color: var(--uno-accent-blue);
+  background: var(--uno-bg);
+  border: 1px solid var(--uno-border);
+}
+
+.phaseLabelCi {
+  color: var(--uno-accent-purple);
+  background: var(--uno-bg);
+  border: 1px solid var(--uno-border);
+}
+
+.phaseNodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+/* ── Node ── */
+.nodeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  max-width: 320px;
+}
+
+.nodeWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 16px 16px;
+  background: var(--uno-surface);
+  border: 1px solid var(--uno-border);
+  border-radius: var(--uno-radius);
+  width: 100%;
+  cursor: default;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.node:hover {
+  transform: translateY(-4px);
+  background: var(--uno-surface-hover);
+  box-shadow: var(--uno-glow-teal);
+}
+
+/* Top accent border based on phase */
+.nodeSetup {
+  border-top: 2px solid var(--uno-text-muted);
+}
+
+.nodeDev {
+  border-top: 2px solid var(--uno-accent);
+}
+
+.nodePrep {
+  border-top: 2px solid var(--uno-accent-blue);
+}
+
+.nodeCi {
+  border-top: 2px solid var(--uno-accent-purple);
+}
+
+.nodeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--uno-text);
+  margin-bottom: 12px;
+}
+
+.nodeCommand {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--uno-text);
+  margin-bottom: 6px;
+}
+
+.nodeLabel {
+  font-size: 0.75rem;
+  color: var(--uno-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Automated badge ── */
+.ciBadge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--uno-bg);
+  color: var(--uno-accent-purple);
+  border: 1px solid var(--uno-accent-purple);
+  white-space: nowrap;
+}
+
+/* ── Connector line ── */
+.connector {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 0;
+}
+
+.connectorLine {
+  width: 2px;
+  height: 36px;
+  position: relative;
+  background: var(--uno-border);
+  overflow: hidden;
+}
+
+.connectorLine::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--uno-accent), transparent);
+  animation: flowDown 2s linear infinite;
+}
+
+@keyframes flowDown {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* Connector between groups is taller */
+.connectorWide {
+  padding: 16px 0;
+}
+.connectorWide .connectorLine {
+  height: 48px;
+}
+
+/* ── Sub-nodes (nested steps) ── */
+.subNodesGroup {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.subNodeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subNodeWrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.subConnectorLine {
+  width: 2px;
+  height: 20px;
+  background: var(--uno-border);
+  margin-bottom: 8px;
+}
+
+.subNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 10px 10px;
+  background: var(--uno-surface);
+  border: 1px solid var(--uno-border);
+  border-radius: var(--uno-radius);
+  width: 100%;
+  cursor: default;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  font-size: 0.9em;
+}
+
+.subNode:hover {
+  transform: translateY(-3px);
+  background: var(--uno-surface-hover);
+  box-shadow: var(--uno-glow-teal);
+}
+
+/* ── Optional branch ── */
+.optionalBranches {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 48px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.optionalBranch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.8s,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
+}
+
+.optionalBranch.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nodeOptional {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 14px 14px;
+  background: var(--uno-surface);
+  border: 1px dashed var(--uno-text-muted);
+  border-radius: var(--uno-radius);
+  width: 100%;
+  max-width: 280px;
+  cursor: default;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  opacity: 0.8;
+}
+
+.nodeOptional:hover {
+  opacity: 1;
+  border-color: var(--uno-accent);
+}
+
+.branchLine {
+  width: 2px;
+  height: 28px;
+  background: var(--uno-text-muted);
+  border-style: dashed;
+  border-width: 0 2px 0 0;
+  opacity: 0.5;
+}
+
+.branchLabel {
+  font-size: 0.65rem;
+  color: var(--uno-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 60px 0 80px;
+  }
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+  .sectionSubtitle {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    padding: 0 16px;
+  }
+  .nodeWrapper,
+  .nodeOptional {
+    max-width: 100%;
+  }
+}

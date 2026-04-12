@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2024"],
+    "types": ["node"],
+    "rootDir": ".",
+    "declaration": true,
+    "sourceMap": false,
+    "declarationMap": false,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "cngpac": ["./src"]
+    }
+  },
+  "include": ["src", "**/cngpac.config.ts", "tests"],
+  "exclude": ["src/**/*.config.ts"]
+}

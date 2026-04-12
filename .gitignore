@@ -1,0 +1,12 @@
+node_modules
+
+# Build
+dist
+*.tgz
+
+# Tests
+tests/.tmp
+
+# Others
+*.log
+.DS_Store
