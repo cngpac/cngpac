@@ -4,7 +4,20 @@
   "description": "A highly configurable package release manager",
   "license": "Apache-2.0",
   "homepage": "https://cngpac.dev",
-  "keywords": [],
+  "keywords": [
+    "release",
+    "changelog",
+    "versioning",
+    "semver",
+    "publish",
+    "npm-publish",
+    "github-releases",
+    "changenotes",
+    "release-management",
+    "ci-cd",
+    "release-automation",
+    "package-manager"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cngpac/cngpac.git"
