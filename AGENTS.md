@@ -243,7 +243,7 @@ interface CngpacConfig {
 │   └── version.yml             # GitHub Actions workflow template
 ├── website/                    # Docusaurus documentation site
 │   ├── docs/                   # "next" version docs
-│   ├── versioned_docs/         # "stable" version docs
+│   ├── versioned_docs/         # "latest" version docs
 │   ├── changelogs/             # Generated changelogs
 │   └── src/                    # React components, CSS
 ├── tsconfig.json               # Root TS config (src + tests)
@@ -393,9 +393,9 @@ it("creates changenote with args", async () => {
 
 The docs site is built with **Docusaurus** and lives in `website/`.
 
-- **Dev server**: `pnpm web` (runs from `website/` directory)
-- **Docs source**: `website/docs/` (next version) and `website/versioned_docs/version-stable/` (stable)
-- **Versions**: Managed via `website/versions.json` — currently `["stable"]`
+- **Dev server**: `pnpm web`
+- **Docs source**: `website/docs/` (next version) and `website/versioned_docs/version-latest/` (latest)
+- **Versions**: Managed via `website/versions.json` — currently `["latest"]`
 
 ### Key documentation pages
 
@@ -410,15 +410,16 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 
 ### When to update docs
 
-- Adding a new CLI command → add `website/docs/cli/{command}.md` and update `website/sidebars.ts`
-- Changing config options → update `website/docs/configuration.md`
-- Changing changenote format → update `website/docs/concepts.md`
+- Adding/Changing a CLI command → add `website/docs/cli/{command}.md`
+- Adding/Changing config options → update `website/docs/configuration.md`
+- Adding/Changing changenote format → update `website/docs/concepts.md`
+- Or any behavior change that affects users → update the relevant docs page with clear instructions and examples
 
 ---
 
 ## 8. Best Practices
 
-### Code style (enforced by Biome)
+### Code style
 
 - **JSDoc**: Required for all public APIs
 - **Indentation**: Spaces, 2 per level
