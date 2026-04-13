@@ -143,45 +143,7 @@ const config: Config = {
       ],
     },
     footer: {
-      style: "dark",
-      links: [
-        {
-          title: "Docs",
-          items: [
-            {
-              label: "Get Started",
-              to: "/docs/latest/intro",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
-            {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/cngpac",
-            },
-            {
-              label: "Discord",
-              href: "https://discordapp.com/invite/cngpac",
-            },
-            {
-              label: "X",
-              href: "https://x.com/cngpac",
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "GitHub",
-              href: "https://github.com/cngpac/cngpac",
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} Cngpac. Built with Docusaurus.`,
+      copyright: `<a href="https://github.com/cngpac/cngpac/blob/main/LICENSE">Apache 2.0</a> | Copyright © ${new Date().getFullYear()} Cngpac. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

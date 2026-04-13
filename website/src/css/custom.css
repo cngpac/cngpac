@@ -75,7 +75,7 @@
 
   --ifm-background-color: var(--uno-bg);
   --ifm-navbar-background-color: rgba(24, 25, 26, 0.85); /* Slightly translucent */
-  --ifm-footer-background-color: var(--uno-bg-deep);
+  --ifm-footer-background-color: #1b1b1d;
 }
 
 /* ── Global smoothing ── */
