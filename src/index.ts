@@ -49,6 +49,7 @@ export type {
   PublisherPlugin,
   ReleaserPlugin,
   VersionBump,
+  VersionPlugin,
 } from "./types";
 export { loadConfig } from "./utils";
 export { applyVersionBump, consumeChangenotes } from "./version";

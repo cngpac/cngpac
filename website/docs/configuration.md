@@ -201,6 +201,22 @@ noteNameGenerator: () => `note-${Date.now()}`;
 
 The function must return a unique string (without file extension) used as the changenote filename.
 
+### `version`
+
+An optional object for customizing the commit message and tag name created during the `version` command.
+
+```ts
+version: {
+  // Custom commit message (default: "Release {name}@{version}")
+  commitMessage: (bump) => `chore(release): ${bump.packageName}@${bump.newVersion}`,
+
+  // Custom tag name (default: "{name}@{version}")
+  tagName: (bump) => `v${bump.newVersion}`,
+}
+```
+
+Both functions receive a `VersionBump` object with properties like `packageName`, `newVersion`, `previousVersion`, and `bumpType`.
+
 ## Complete Example
 
 Here's a full production config from the Cngpac project itself:
@@ -260,6 +276,7 @@ import type {
   FormatterPlugin,
   PreStagePlugin,
   NoteNameGenerator,
+  VersionPlugin,
 } from "cngpac";
 ```
 

@@ -130,6 +130,17 @@ Formats files created or modified by CLI commands. The built-in formatter (`crea
 createFormatter({ extensions: ["json", "md"], command: "oxfmt" });
 ```
 
+### Version
+
+Customizes the commit message and tag name produced by the `version` command. By default, Cngpac uses `Release {name}@{version}` for commits and `{name}@{version}` for tags. Override either or both via the `version` config option:
+
+```ts
+version: {
+  commitMessage: (bump) => `chore(release): ${bump.packageName}@${bump.newVersion}`,
+  tagName: (bump) => `v${bump.newVersion}`,
+}
+```
+
 ---
 
 **Next:** [Quick Start →](./quick-start.md)
