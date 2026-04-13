@@ -17,4 +17,8 @@ export default defineConfig({
   env: {
     VERSION: pkg.version,
   },
+  exports: {
+    enabled: false,
+    inlinedDependencies: false,
+  },
 });

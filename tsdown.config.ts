@@ -8,4 +8,8 @@ export default defineConfig({
   unbundle: true,
   dts: true,
   clean: true,
+  exports: {
+    enabled: true,
+    inlinedDependencies: false,
+  },
 });
