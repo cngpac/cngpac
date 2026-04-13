@@ -9,7 +9,7 @@ Initialize Cngpac for your project. This command scaffolds the configuration fil
 
 ## Usage
 
-```bash
+```bash npm2yarn
 npx cngpac init
 ```
 

@@ -10,7 +10,7 @@ Increment the attempt counter in `prepare.json` and optionally commit and push. 
 ## Usage
 
 ```bash
-npx cngpac reprepare [options]
+cngpac reprepare [options]
 ```
 
 **Alias:** `reprep`
@@ -46,7 +46,7 @@ A `prepare.json` file must already exist. If not, the command exits with:
 
 ```bash
 # CI failed — retry the release
-npx cngpac reprepare --push
+cngpac reprepare --push
 ```
 
 ```

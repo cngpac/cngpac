@@ -17,7 +17,7 @@ Set up Cngpac and ship your first release in under a minute.
 
 Run the init command from your project root:
 
-```bash
+```bash npm2yarn
 npx cngpac init
 ```
 
@@ -35,7 +35,7 @@ The command auto-detects your GitHub repository from `package.json` and adapts t
 Make a code change, then describe it:
 
 ```bash
-npx cngpac change
+cngpac change
 ```
 
 You'll be prompted for:
@@ -52,7 +52,7 @@ This creates a markdown file in `.changenotes/` like:
 You can also skip the prompts by passing arguments directly:
 
 ```bash
-npx cngpac change minor "feat: add dark mode"
+cngpac change minor "feat: add dark mode"
 ```
 
 :::tip
@@ -64,7 +64,7 @@ Edit the generated changenote to add a body if you want more detail in the chang
 Stage your code changes and the changenote, then:
 
 ```bash
-npx cngpac commit --push
+cngpac commit --push
 ```
 
 This commits using the changenote title as the commit message and pushes to origin.
@@ -74,7 +74,7 @@ This commits using the changenote title as the commit message and pushes to orig
 Once your PR is merged to `main`, prepare the release:
 
 ```bash
-npx cngpac prepare release --push
+cngpac prepare release --push
 ```
 
 This:
@@ -89,7 +89,7 @@ This:
 The generated GitHub Actions workflow detects `prepare.json` on `main` and runs:
 
 ```bash
-npx cngpac version --commit --tag --push --publish --release
+cngpac version --commit --tag --push --publish --release
 ```
 
 Your package is now:

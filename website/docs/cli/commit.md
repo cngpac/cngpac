@@ -10,7 +10,7 @@ Commit a staged changenote using its title as the git commit message.
 ## Usage
 
 ```bash
-npx cngpac commit [options]
+cngpac commit [options]
 ```
 
 ## Options
@@ -40,7 +40,7 @@ npx cngpac commit [options]
 ### Commit only
 
 ```bash
-npx cngpac commit
+cngpac commit
 ```
 
 ```
@@ -51,7 +51,7 @@ npx cngpac commit
 ### Commit and push
 
 ```bash
-npx cngpac commit --push
+cngpac commit --push
 ```
 
 ```

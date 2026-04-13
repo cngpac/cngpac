@@ -11,7 +11,7 @@ Cngpac provides seven commands that cover the full release lifecycle. This page 
 
 ```bash
 # Run directly via npx
-npx cngpac <command>
+cngpac <command>
 
 # Or install globally
 npm install -g cngpac
@@ -33,7 +33,7 @@ npm install -g cngpac
 
 ```bash
 # One-time setup
-cngpac init
+npx cngpac init
 
 # During development (per change)
 cngpac change

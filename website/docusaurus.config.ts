@@ -73,6 +73,15 @@ const config: Config = {
         ],
         sidebarPath: "./sidebars.ts",
         versions: docsVersions,
+        remarkPlugins: [
+          [
+            require("@docusaurus/remark-plugin-npm2yarn"),
+            {
+              sync: true,
+              converters: ["pnpm", "bun", "yarn"],
+            },
+          ],
+        ],
       } satisfies Options,
     ],
     [

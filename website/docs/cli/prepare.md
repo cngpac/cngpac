@@ -10,7 +10,7 @@ Calculate the next version based on changenotes and write a `prepare.json` file 
 ## Usage
 
 ```bash
-npx cngpac prepare <type> [tag] [options]
+cngpac prepare <type> [tag] [options]
 ```
 
 **Alias:** `prep`
@@ -69,19 +69,19 @@ npx cngpac prepare <type> [tag] [options]
 ### Stable release
 
 ```bash
-npx cngpac prepare release --push
+cngpac prepare release --push
 ```
 
 ### Beta pre-release
 
 ```bash
-npx cngpac prepare prerelease beta --push
+cngpac prepare prerelease beta --push
 ```
 
 ### Release prep without pushing
 
 ```bash
-npx cngpac prepare release
+cngpac prepare release
 ```
 
 ## CI Trigger

@@ -10,7 +10,7 @@ Add a new changenote to describe a code change. Changenotes are the foundation o
 ## Usage
 
 ```bash
-npx cngpac change [bump] [title]
+cngpac change [bump] [title]
 ```
 
 **Alias:** `cng`
@@ -27,7 +27,7 @@ npx cngpac change [bump] [title]
 When called without arguments, the command prompts you:
 
 ```
-$ npx cngpac change
+$ cngpac change
 ◇ Adding a new changenote!
 │
 ◆ Bump type?
@@ -49,7 +49,7 @@ $ npx cngpac change
 Pass both arguments to skip all prompts:
 
 ```bash
-npx cngpac change minor "feat: add dark mode support"
+cngpac change minor "feat: add dark mode support"
 ```
 
 ## Output

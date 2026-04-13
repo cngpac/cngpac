@@ -12,7 +12,7 @@ This command is typically run by CI, not manually.
 ## Usage
 
 ```bash
-npx cngpac version [options]
+cngpac version [options]
 ```
 
 **Alias:** `vrsn`
@@ -91,7 +91,7 @@ Runs each **releaser** plugin. The built-in GitHub releaser creates a GitHub Rel
 ## Typical CI Usage
 
 ```bash
-npx cngpac version --commit --tag --push --publish --release
+cngpac version --commit --tag --push --publish --release
 ```
 
 This is the command used in the generated `.github/workflows/version.yml`.

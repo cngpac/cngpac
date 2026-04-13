@@ -10,7 +10,7 @@ Generate a changelog preview from your current changenotes and open it in your d
 ## Usage
 
 ```bash
-npx cngpac preview
+cngpac preview
 ```
 
 ## How It Works
@@ -43,7 +43,7 @@ The version number is shown as `x.x.x` since no `prepare.json` exists yet — th
 ## Example
 
 ```bash
-npx cngpac preview
+cngpac preview
 ```
 
 ```

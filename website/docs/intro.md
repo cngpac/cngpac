@@ -36,15 +36,15 @@ Cngpac splits the release process into two phases:
 ### Development Phase (you do this)
 
 ```bash
-npx cngpac change       # Add a changenote describing your change
-npx cngpac commit       # Commit the changenote with its title as the message
-npx cngpac prepare release --push  # Prepare version → commit → push → trigger CI
+cngpac change       # Add a changenote describing your change
+cngpac commit       # Commit the changenote with its title as the message
+cngpac prepare release --push  # Prepare version → commit → push → trigger CI
 ```
 
 ### CI Phase (automated)
 
 ```bash
-npx cngpac version --commit --tag --push --publish --release
+cngpac version --commit --tag --push --publish --release
 ```
 
 This single command reads the prepared version, consumes all changenotes, bumps the package, generates the changelog, and runs all publisher and releaser plugins.
