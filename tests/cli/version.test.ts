@@ -282,4 +282,55 @@ describe("version command", () => {
     expect(mockGitOps.tag).not.toHaveBeenCalled();
     expect(mockGitOps.push).not.toHaveBeenCalled();
   });
+
+  it("uses version.commitMessage plugin for custom commit message", async () => {
+    mockConfig.version = {
+      commitMessage: (vb) => `chore: release v${vb.newVersion}`,
+    };
+
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({ commit: true });
+
+    expect(mockGitOps.commit).toHaveBeenCalledWith("chore: release v1.0.1");
+  });
+
+  it("uses version.tagName plugin for custom tag name", async () => {
+    mockConfig.version = {
+      tagName: (vb) => `v${vb.newVersion}`,
+    };
+
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({ tag: true });
+
+    expect(mockGitOps.tag).toHaveBeenCalledWith("v1.0.1");
+  });
+
+  it("passes custom tag name to releaser plugins", async () => {
+    const mockReleaser = vi.fn();
+    mockConfig.releasers = [mockReleaser];
+    mockConfig.version = {
+      tagName: (vb) => `v${vb.newVersion}`,
+    };
+
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({ release: true });
+
+    expect(mockReleaser).toHaveBeenCalledWith(
+      expect.objectContaining({
+        tagName: "v1.0.1",
+      }),
+    );
+  });
 });

@@ -154,12 +154,16 @@ export async function versionCommand(
   ) {
     await gitOps.ensureGitIdentity();
     await gitOps.add(dirtyFiles);
-    const message = `Release ${pkgJson.name}@${newVersion}`;
+    const message = config.version?.commitMessage
+      ? config.version.commitMessage(versionBump)
+      : `Release ${pkgJson.name}@${newVersion}`;
     await gitOps.commit(message);
     p.log.success(`Committed: ${message}`);
   }
 
-  const tagName = `${pkgJson.name}@${newVersion}`;
+  const tagName = config.version?.tagName
+    ? config.version.tagName(versionBump)
+    : `${pkgJson.name}@${newVersion}`;
 
   if (options.tag || options.push || options.publish || options.release) {
     await gitOps.tag(tagName);

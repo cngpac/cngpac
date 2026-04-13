@@ -139,6 +139,17 @@ export type PreStagePlugin = (props: {
 export type NoteNameGenerator = () => string;
 
 /**
+ * Version plugin for customizing commit messages and tag names
+ * during the version command.
+ */
+export type VersionPlugin = {
+  /** Custom function to generate the commit message */
+  commitMessage?: (versionBump: VersionBump) => string;
+  /** Custom function to generate the tag name */
+  tagName?: (versionBump: VersionBump) => string;
+};
+
+/**
  * A formatter plugin.
  * Declares which file extensions it handles and a function that formats them in place.
  * Called after CLI commands create or modify files.
@@ -178,4 +189,6 @@ export interface CngpacConfig {
   preStage?: PreStagePlugin[];
   /** Optional custom generator for changenote filenames */
   noteNameGenerator?: NoteNameGenerator;
+  /** Optional version plugin for customizing release commit messages and tag names */
+  version?: VersionPlugin;
 }
