@@ -1,5 +1,6 @@
 import { join, relative } from "node:path";
 import * as p from "@clack/prompts";
+import chalk from "chalk";
 import { createGitOps, parseChangenotefile } from "cngpac";
 
 export async function commitCommand(options: {
@@ -37,13 +38,16 @@ export async function commitCommand(options: {
   const changenote = await parseChangenotefile(changenoteFile);
 
   const branch = await gitOps.currentBranch();
-  p.intro(`Commiting → "${relative(rootDir, changenoteFile)}"`);
+  const branchLocal = chalk.cyan(branch);
+  const branchRemote = chalk.yellow(`origin/${branch}`);
+
+  p.intro(`Commiting → ${relative(rootDir, changenoteFile)}`);
   await gitOps.commit(changenote.title);
-  p.outro(`Committed → ${changenote.title} → ${branch}`);
+  p.outro(`Committed → ${changenote.title} → ${branchLocal}`);
 
   if (options.push) {
-    p.intro(`Pushing → ${branch} → origin/${branch}`);
+    p.intro(`Pushing → ${branchLocal} → ${branchRemote}`);
     await gitOps.pushSetUpstream(branch);
-    p.outro(`Pushed → ${branch} → origin/${branch}`);
+    p.outro(`Pushed → ${branchLocal} → ${branchRemote}`);
   }
 }
