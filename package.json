@@ -45,7 +45,7 @@
   },
   "scripts": {
     "format": "biome format --write && oxfmt **/*.{md,yml,css}",
-    "format:check": "biome format --check && oxfmt --check **/*.{md,yml,css}",
+    "format:check": "biome format && oxfmt --check **/*.{md,yml,css}",
     "lint": "biome lint --write",
     "typecheck-src": "tsc --noEmit --project tsconfig.json",
     "typecheck-cli": "tsc --noEmit --project src/cli/tsconfig.json",
