@@ -86,8 +86,7 @@ html {
 }
 
 /* ── Navbar glass effect in dark mode ── */
-[data-theme="dark"] .navbar {
-  backdrop-filter: blur(12px) saturate(180%);
+[data-theme="dark"] .navbar--fixed-top {
   border-bottom: 1px solid rgba(62, 64, 66, 0.5);
 }
 
