@@ -169,6 +169,8 @@ export interface CngpacConfig {
     owner: string;
     name: string;
   };
+  /** Optional custom generator for changenote filenames */
+  noteNameGenerator?: NoteNameGenerator;
   changelog: {
     /**
      * A plugin that generates the changelog from changenotes.
@@ -179,16 +181,14 @@ export interface CngpacConfig {
      */
     saver?: ChangelogSaver;
   };
+  /** Pre-stage plugins called before staging dirty files during the version command */
+  preStage?: PreStagePlugin[];
+  /** Formatter plugins called on files created/changed by CLI commands */
+  formatters?: FormatterPlugin[];
+  /** Optional version plugin for customizing release commit messages and tag names */
+  version?: VersionPlugin;
   /** List of publisher plugins called after git push during the version command */
   publishers?: PublisherPlugin[];
   /** List of releaser plugins called after publishers during the version command */
   releasers?: ReleaserPlugin[];
-  /** Formatter plugins called on files created/changed by CLI commands */
-  formatters?: FormatterPlugin[];
-  /** Pre-stage plugins called before staging dirty files during the version command */
-  preStage?: PreStagePlugin[];
-  /** Optional custom generator for changenote filenames */
-  noteNameGenerator?: NoteNameGenerator;
-  /** Optional version plugin for customizing release commit messages and tag names */
-  version?: VersionPlugin;
 }
