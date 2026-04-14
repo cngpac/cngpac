@@ -28,7 +28,7 @@ export default defineConfig({
   preStage: [
     async ({ configDir, versionBump }) => {
       const src = join(configDir, "website/docs");
-      const dest = join(configDir, "website/versioned_docs/version-stable");
+      const dest = join(configDir, "website/versioned_docs/version-latest");
 
       await rm(dest, { recursive: true, force: true });
       await cp(src, dest, { recursive: true, force: true });
@@ -37,7 +37,7 @@ export default defineConfig({
       const versionsInfo = JSON.parse(
         await readFile(versionsInfoPath, "utf-8"),
       );
-      versionsInfo.stable.label = `Stable - ${versionBump.newVersion}`;
+      versionsInfo.latest.label = `Latest - ${versionBump.newVersion}`;
       await writeFile(versionsInfoPath, JSON.stringify(versionsInfo, null, 2));
 
       const files = await glob("**/*", {
