@@ -1,7 +1,7 @@
 packages:
   - "website"
 allowBuilds:
-  '@swc/core': true
+  "@swc/core": true
   core-js: true
   core-js-pure: true
   esbuild: true

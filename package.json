@@ -44,8 +44,8 @@
     "cngpac": "dist/bin.mjs"
   },
   "scripts": {
-    "format": "biome format --write && oxfmt **/*.{md,yml,css}",
-    "format:check": "biome format && oxfmt --check **/*.{md,yml,css}",
+    "format": "biome format --write && oxfmt **/*.{md,yml,yaml,css}",
+    "format:check": "biome format && oxfmt --check **/*.{md,yml,yaml,css}",
     "lint": "biome lint --write",
     "typecheck-src": "tsc --noEmit --project tsconfig.json",
     "typecheck-cli": "tsc --noEmit --project src/cli/tsconfig.json",
