@@ -2,7 +2,7 @@ import type { Options } from "@docusaurus/plugin-content-docs";
 import type * as PresetClassic from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
 import { themes as prismThemes } from "prism-react-renderer";
-import docsVersions from "./docsVersions.json";
+import versionsInfo from "./versionsInfo.json";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -72,7 +72,7 @@ const config: Config = {
           "**/__tests__/**",
         ],
         sidebarPath: "./sidebars.ts",
-        versions: docsVersions,
+        versions: versionsInfo,
         remarkPlugins: [
           [
             require("@docusaurus/remark-plugin-npm2yarn"),

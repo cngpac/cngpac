@@ -33,12 +33,12 @@ export default defineConfig({
       await rm(dest, { recursive: true, force: true });
       await cp(src, dest, { recursive: true, force: true });
 
-      const docsVersionsPath = join(configDir, "website/docsVersions.json");
-      const docsVersions = JSON.parse(
+      const docsVersionsPath = join(configDir, "website/versionsInfo.json");
+      const versionsInfo = JSON.parse(
         await readFile(docsVersionsPath, "utf-8"),
       );
-      docsVersions.stable.label = `Stable - ${versionBump.newVersion}`;
-      await writeFile(docsVersionsPath, JSON.stringify(docsVersions, null, 2));
+      versionsInfo.stable.label = `Stable - ${versionBump.newVersion}`;
+      await writeFile(docsVersionsPath, JSON.stringify(versionsInfo, null, 2));
 
       const files = await glob("**/*", {
         cwd: dest,
