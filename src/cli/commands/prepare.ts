@@ -35,8 +35,8 @@ export interface PrepareCommandOptions {
 }
 
 export async function prepareCommand(
-  type: string,
-  tag: string | undefined,
+  argType: string,
+  argTag: string | undefined,
   options: PrepareCommandOptions = {},
 ): Promise<void> {
   const rootDir = process.cwd();
@@ -46,9 +46,9 @@ export async function prepareCommand(
 
   p.intro("Preparing for version bump");
 
-  if (!VALID_TYPES.includes(type as ReleaseType)) {
+  if (!VALID_TYPES.includes(argType as ReleaseType)) {
     p.log.error(
-      `Invalid type "${type}". Must be one of: ${VALID_TYPES.join(", ")}`,
+      `Invalid type "${argType}". Must be one of: ${VALID_TYPES.join(", ")}`,
     );
     process.exit(1);
   }
@@ -61,29 +61,23 @@ export async function prepareCommand(
     return;
   }
 
-  const isPreType = PRE_TYPES.includes(type);
-  const preTag = isPreType ? (tag ?? "alpha") : undefined;
+  const isPreType = PRE_TYPES.includes(argType);
+  const preTag = isPreType ? (argTag ?? "alpha") : undefined;
 
-  // Calculate version bump
-  const partialConfig = isPreType
-    ? { type: type as PreReleaseType, tag: preTag as string }
+  const releaseConfig = isPreType
+    ? { type: argType as PreReleaseType, tag: preTag as string }
     : { type: "release" as const };
   const versionBump = await calculateVersionBump(
     pkgJsonPath as PkgFileAbsPath,
     changenotes,
     rootDir,
-    partialConfig,
+    releaseConfig,
   );
   const { packageName, newVersion } = versionBump;
 
-  const confirm = await p.confirm({
-    message: `Prepare ${versionBump.packageName}: ${versionBump.currentVersion} → ${versionBump.newVersion} ?`,
-  });
-
-  if (p.isCancel(confirm) || !confirm) {
-    p.cancel("Cancelled");
-    process.exit(0);
-  }
+  p.log.info(
+    `Prepare ${versionBump.packageName}: ${versionBump.currentVersion} → ${versionBump.newVersion}`,
+  );
 
   const prepareConfig: PrepareConfig = {
     newVersion,

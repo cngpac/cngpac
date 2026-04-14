@@ -30,7 +30,7 @@ export async function calculateVersionBump(
   pkgFilePath: PkgFileAbsPath,
   changenotes: (Changenote & { commit?: ChangenoteCommit })[],
   rootDir: string,
-  prepareConfig?:
+  releaseConfig?:
     | { type: "release" }
     | {
         type: "prerelease" | "prepatch" | "preminor" | "premajor";
@@ -55,8 +55,8 @@ export async function calculateVersionBump(
 
   let newVersion: string | null;
 
-  if (prepareConfig?.type === "prerelease") {
-    const tag = prepareConfig.tag;
+  if (releaseConfig?.type === "prerelease") {
+    const tag = releaseConfig.tag;
     const pre = semver.prerelease(currentVersion);
     // If already a prerelease with the same tag, just increment the prerelease number
     if (pre && pre[0] === tag) {
@@ -65,14 +65,14 @@ export async function calculateVersionBump(
       newVersion = semver.inc(currentVersion, `pre${bump}`, tag);
     }
   } else if (
-    prepareConfig?.type === "prepatch" ||
-    prepareConfig?.type === "preminor" ||
-    prepareConfig?.type === "premajor"
+    releaseConfig?.type === "prepatch" ||
+    releaseConfig?.type === "preminor" ||
+    releaseConfig?.type === "premajor"
   ) {
     newVersion = semver.inc(
       currentVersion,
-      prepareConfig.type,
-      prepareConfig.tag,
+      releaseConfig.type,
+      releaseConfig.tag,
     );
   } else {
     newVersion = semver.inc(currentVersion, bump);

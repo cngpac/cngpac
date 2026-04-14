@@ -80,7 +80,7 @@ cngpac prepare release --push
 This:
 
 1. Reads all changenotes and calculates the next version
-2. Asks for confirmation (e.g., `1.0.0 → 1.1.0`)
+2. Logs the planned version bump (e.g., `1.0.0 → 1.1.0`)
 3. Writes `.changenotes/prepare.json`
 4. Commits and pushes to trigger CI
 
