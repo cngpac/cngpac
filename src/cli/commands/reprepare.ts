@@ -13,7 +13,7 @@ export async function reprepareCommand(
   const rootDir = process.cwd();
   const changenoteDir = join(rootDir, ".changenotes");
 
-  p.intro("Preparing new reprepare");
+  p.intro("Re-preparing for version bump");
 
   const existing = await readPrepareConfig(changenoteDir);
   if (!existing) {
