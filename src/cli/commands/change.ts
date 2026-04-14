@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { join, relative } from "node:path";
 import * as p from "@clack/prompts";
 import { type ChangenoteMetadata, loadConfig, writeChangenote } from "cngpac";
@@ -58,12 +59,25 @@ export async function changeCommand(
     }
   } catch {}
 
-  const noteName = generateNoteName();
+  const changenotesDir = join(rootDir, ".changenotes");
+  let noteName = generateNoteName();
+  let nameFound = !existsSync(join(changenotesDir, `${noteName}.md`));
+  for (let i = 1; i < 10 && !nameFound; i++) {
+    noteName = generateNoteName();
+    nameFound = !existsSync(join(changenotesDir, `${noteName}.md`));
+  }
+
+  if (!nameFound) {
+    p.cancel(
+      "ERROR: Failed to generate a unique changenote name after 10 attempts.",
+    );
+    process.exit(1);
+  }
 
   const frontmatter: ChangenoteMetadata = { bump };
 
   const csPath = await writeChangenote(
-    join(rootDir, ".changenotes"),
+    changenotesDir,
     noteName,
     frontmatter,
     title,
