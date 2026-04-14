@@ -160,11 +160,11 @@ Every stage of the pipeline is extensible via `CngpacConfig`:
 | Plugin Type          | Signature                                                  | Purpose                         |
 | -------------------- | ---------------------------------------------------------- | ------------------------------- |
 | `ChangelogGenerator` | `(bump, changenotes[], config) => Promise<string>`         | Generate changelog markdown     |
-| `ChangelogSaver`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Persist changelog to disk       |
+| `ChangelogSaver`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Save changelog in the codebase  |
 | `PublisherPlugin`    | `(props) => Promise<void> \| void`                         | Publish package (e.g., npm)     |
 | `ReleaserPlugin`     | `(props) => Promise<void> \| void`                         | Create release (e.g., GitHub)   |
 | `PreStagePlugin`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Run before git staging          |
-| `FormatterPlugin`    | `{ extensions, format(filePaths, rootDir) }`               | Format dirty files by extension |
+| `FormatterPlugin`    | `{ extensions, format(filePaths, rootDir) }`               | Format dirty files before stage |
 | `NoteNameGenerator`  | `() => string`                                             | Custom changenote file naming   |
 
 ### Branded Types
@@ -293,7 +293,7 @@ This project uses itself for releases. The config is at `cngpac.config.ts`:
 
 - Generates changelogs
 - Saves changelogs to `website/changelogs/`
-- Copies `website/docs/` → `website/versioned_docs/version-stable/` as a pre-stage step
+- Copies `website/docs/` → `website/versioned_docs/version-latest/` as a pre-stage step
 - Formats output with Biome and oxfmt
 - Publishes to npm
 - Creates GitHub releases
@@ -394,8 +394,9 @@ it("creates changenote with args", async () => {
 The docs site is built with **Docusaurus** and lives in `website/`.
 
 - **Dev server**: `pnpm web`
-- **Docs source**: `website/docs/` (next version) and `website/versioned_docs/version-latest/` (latest)
-- **Versions**: Managed via `website/versions.json` — currently `["latest"]`
+- **Docs source**: `website/docs/`
+- **Previous docs**: `website/versioned_docs/`
+- **Versions**: Managed via `website/versions.json` and `website/versionsInfo.json`
 
 ### Key documentation pages
 
@@ -426,7 +427,7 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 - **Quotes**: Double quotes
 - **Semicolons**: Always
 - **Imports**: Named imports, `import type` for type-only imports, organized automatically
-- **Node builtins**: Prefix with `node:` (e.g., `import fs from "node:fs/promises"`)
+- **Node builtins**: Prefix with `node:`
 
 ### Naming conventions
 
@@ -493,8 +494,7 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 
 - **Run `pnpm test` after every change.** Tests are fast and catch regressions early.
 - **Run `pnpm typecheck` before committing.** There are three separate tsconfigs (src, cli, website) — `pnpm typecheck` checks all of them.
-- **Run `pnpm lint` and `pnpm format`** to keep code consistent with the project's Biome and oxfmt configuration.
-- **Don't change what you don't need to.** Avoid drive-by refactors, adding docstrings to untouched code, or reorganizing imports in files you didn't modify.
+- **Run `pnpm lint`** to keep code consistent with the project's Biome configuration.
 
 ### When Unsure
 
@@ -502,3 +502,7 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 - **Check the test files** (`tests/cli/`) — they serve as executable documentation for how each command is expected to behave, including edge cases.
 - **Check `package.json`** for the available scripts, exports map, and dependency list.
 - **Ask rather than guess** when a guess affects the public API, config schema, or release process.
+
+---
+
+**Important :** Update this file when you change anything mentioned here.
