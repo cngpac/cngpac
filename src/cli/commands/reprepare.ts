@@ -1,5 +1,6 @@
 import { join, relative } from "node:path";
 import * as p from "@clack/prompts";
+import chalk from "chalk";
 import { createGitOps, readPrepareConfig, writePrepareConfig } from "cngpac";
 
 export interface ReprepareCommandOptions {
@@ -27,17 +28,21 @@ export async function reprepareCommand(
 
   const filePath = await writePrepareConfig(changenoteDir, prepareconfig);
   p.log.success(
-    `Updated prepare config (attempt: ${nextAttempt}): ${relative(rootDir, filePath)}`,
+    `Updated ${relative(rootDir, filePath)} with attempt: ${nextAttempt}`,
   );
 
   if (options.commit || options.push) {
     const gitOps = createGitOps(rootDir);
+    const branch = await gitOps.currentBranch();
+    const branchLocal = chalk.cyan(branch);
+
     await gitOps.add([".changenotes/prepare.json"]);
     const message = `chore: prepare ${existing.newVersion} (attempt ${nextAttempt})`;
     await gitOps.commit(message);
-    p.log.success(`Committed: ${message}`);
+    p.log.success(`Committed → ${message} → ${branchLocal}`);
 
     if (options.push) {
+      p.log.success(`Pushing to origin`);
       await gitOps.push();
       p.log.success("Pushed to origin");
     }
