@@ -17,6 +17,9 @@ export default defineConfig({
 			githubToken: process.env.GITHUB_TOKEN!,
 		}),
 	},
+	// formatters: [
+	//   createFormatter({ extensions: ["json", "md"], command: "oxfmt" }),
+	// ],
 	publishers: [
 		createNpmPublisher({
 			provenance: true,
@@ -27,7 +30,4 @@ export default defineConfig({
 			token: process.env.GITHUB_TOKEN!,
 		}),
 	],
-	// formatters: [
-	//   createFormatter({ extensions: ["json", "md"], command: "oxfmt" }),
-	// ],
 });
