@@ -7,16 +7,6 @@ title: CLI Reference
 
 Cngpac provides seven commands that cover the full release lifecycle. This page gives an overview — see the individual command pages for full details.
 
-## Installation
-
-```bash
-# Run directly via npx
-cngpac <command>
-
-# Or install globally
-npm install -g cngpac
-```
-
 ## Commands at a Glance
 
 | Command                       | Alias    | Description                                            |
