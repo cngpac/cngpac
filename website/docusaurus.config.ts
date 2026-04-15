@@ -2,8 +2,11 @@ import "dotenv/config";
 import type { Options } from "@docusaurus/plugin-content-docs";
 import type * as PresetClassic from "@docusaurus/preset-classic";
 import type { Config } from "@docusaurus/types";
+import dotenv from "dotenv";
 import { themes as prismThemes } from "prism-react-renderer";
 import versionsInfo from "./versionsInfo.json";
+
+dotenv.config({ path: [".env.local"] });
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
