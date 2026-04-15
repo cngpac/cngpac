@@ -48,6 +48,27 @@ steps:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+### `nameFormat`
+
+- Type: `string`
+- Required: no
+- Default: `"{packageName}@{version}"`
+
+A template string for the release name. Supports the following variables:
+
+| Variable        | Description                          |
+| --------------- | ------------------------------------ |
+| `{packageName}` | The package name from `package.json` |
+| `{version}`     | The new version being released       |
+| `{tagName}`     | The git tag name                     |
+
+```ts
+createGitHubReleaser({
+  token: process.env.GITHUB_TOKEN!,
+  nameFormat: "Release {packageName} v{version}",
+});
+```
+
 ## Release Body
 
 The body of the GitHub Release is the full changelog string produced by your [`changelog.generator`](../configuration.md#changeloggenerator) plugin.
