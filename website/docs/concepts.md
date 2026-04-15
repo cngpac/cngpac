@@ -116,11 +116,11 @@ createChangelogSaver({ filepath: "changelogs/v{version}.md" });
 
 ### Publisher
 
-Runs after git push. The built-in npm publisher (`createNpmPublisher`) publishes to the npm registry with optional provenance attestation.
+Runs after git push. The built-in npm publisher ([`createNpmPublisher`](./publishers/npm.md)) publishes to the npm registry with optional provenance attestation. See [Publishers](./publishers/index.md) for all options and custom publisher docs.
 
 ### Releaser
 
-Runs after publishers. The built-in GitHub releaser (`createGitHubReleaser`) creates a GitHub Release with the changelog as the body.
+Runs after publishers. The built-in GitHub releaser ([`createGitHubReleaser`](./releasers/github.md)) creates a GitHub Release with the changelog as the body. See [Releasers](./releasers/index.md) for all options and custom releaser docs.
 
 ### Formatter
 

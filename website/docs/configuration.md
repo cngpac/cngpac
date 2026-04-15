@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
 title: Configuration
 ---
 
@@ -109,7 +109,7 @@ Template variables:
 
 ### `publishers`
 
-An array of publisher plugins that run after git push during the `version` command.
+An array of publisher plugins that run after git push during the `version` command. See [Publishers](./publishers/index.md) for the full reference.
 
 #### `createNpmPublisher`
 
@@ -133,7 +133,7 @@ publishers: [
 
 ### `releasers`
 
-An array of releaser plugins that run after publishers.
+An array of releaser plugins that run after publishers. See [Releasers](./releasers/index.md) for the full reference.
 
 #### `createGitHubReleaser`
 
