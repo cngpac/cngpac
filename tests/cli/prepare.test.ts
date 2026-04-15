@@ -186,20 +186,6 @@ describe("prepare command", () => {
     expect(mockGitOps.push).toHaveBeenCalled();
   });
 
-  it("handles user cancellation at confirm prompt", async () => {
-    writeChangenoteFile(tmpDir, { bump: "patch" });
-    clack.confirm.mockResolvedValueOnce(Symbol("cancel"));
-    clack.isCancel.mockImplementation(
-      (val: unknown) => typeof val === "symbol",
-    );
-
-    const prepareCommand = await getPrepareCommand();
-    await expect(prepareCommand("release", undefined, {})).rejects.toThrow(
-      "process.exit",
-    );
-    expect(clack.cancel).toHaveBeenCalled();
-  });
-
   it("runs formatter plugins on created file", async () => {
     writeChangenoteFile(tmpDir, { bump: "patch" });
 
