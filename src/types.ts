@@ -169,8 +169,10 @@ export interface CngpacConfig {
     owner: string;
     name: string;
   };
-  /** Optional custom generator for changenote filenames */
-  noteNameGenerator?: NoteNameGenerator;
+  changenote?: {
+    /** Optional custom generator for changenote filenames */
+    nameGenerator?: NoteNameGenerator;
+  };
   changelog: {
     /**
      * A plugin that generates the changelog from changenotes.

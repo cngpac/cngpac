@@ -189,14 +189,16 @@ Each plugin receives:
 
 Return a single `DirtyFileAbsPath`, an array, or `undefined`.
 
-### `noteNameGenerator`
+### `changenote.nameGenerator`
 
 An optional function that generates unique filenames for changenotes created by the `change` command. By default, Cngpac generates random adjective-noun pairs (e.g. `brave-fox`).
 
 ```ts
 import { defaultGenerateNoteName } from "cngpac";
 
-noteNameGenerator: () => `note-${Date.now()}`;
+changenote: {
+  nameGenerator: () => `note-${Date.now()}`,
+},
 ```
 
 The function must return a unique string (without file extension) used as the changenote filename.

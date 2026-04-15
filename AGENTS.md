@@ -150,7 +150,7 @@ Optional body with details.
 ```
 
 - Frontmatter must contain a `bump` field: `"major"`, `"minor"`, or `"patch"`
-- File names are randomly generated (e.g., `brave-azure-fox.md`) or customizable via `noteNameGenerator`
+- File names are randomly generated (e.g., `brave-azure-fox.md`) or customizable via `changenote.nameGenerator`
 - Consumed (deleted) during the `version` command
 
 ### Plugin Architecture
@@ -187,7 +187,7 @@ interface CngpacConfig {
   formatters?: FormatterPlugin[];
   publishers?: PublisherPlugin[];
   releasers?: ReleaserPlugin[];
-  noteNameGenerator?: NoteNameGenerator;
+  changenote?: { nameGenerator?: NoteNameGenerator }; // changenote plugins
 }
 ```
 

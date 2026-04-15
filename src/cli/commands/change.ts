@@ -54,8 +54,8 @@ export async function changeCommand(
   let generateNoteName = defaultGenerateNoteName;
   try {
     const config = await loadConfig(join(rootDir, CONFIG_FILE_NAME));
-    if (config.noteNameGenerator) {
-      generateNoteName = config.noteNameGenerator;
+    if (config.changenote?.nameGenerator) {
+      generateNoteName = config.changenote.nameGenerator;
     }
   } catch {}
 
