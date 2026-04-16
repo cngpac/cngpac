@@ -393,10 +393,10 @@ it("creates changenote with args", async () => {
 
 The docs site is built with **Docusaurus** and lives in `website/`.
 
-- **Dev server**: `pnpm web`
+- **Dev server**: `pnpm run web`
 - **Docs source**: `website/docs/`
-- **Previous docs**: `website/versioned_docs/`
-- **Versions**: Managed via `website/versions.json` and `website/versionsInfo.json`
+
+**Important:** Do not touch `website/versioned_docs/` — unless you're explicitly told to do so.
 
 ### Key documentation pages
 
@@ -505,4 +505,4 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 
 ---
 
-**Important :** Update this file when you change anything mentioned here.
+**Important :** Update this(AGENTS.md) file when you change anything mentioned here.
