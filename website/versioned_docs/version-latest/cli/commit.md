@@ -44,7 +44,7 @@ cngpac commit
 ```
 
 ```
-◇ Commiting → ".changenotes/brave-coral-fox.md"
+◇ Commiting → .changenotes/brave-coral-fox.md
 ◇ Committed → feat: add dark mode support → feature/dark-mode
 ```
 
@@ -55,7 +55,7 @@ cngpac commit --push
 ```
 
 ```
-◇ Commiting → ".changenotes/brave-coral-fox.md"
+◇ Commiting → .changenotes/brave-coral-fox.md
 ◇ Committed → feat: add dark mode support → feature/dark-mode
 ◇ Pushing → feature/dark-mode → origin/feature/dark-mode
 ◇ Pushed → feature/dark-mode → origin/feature/dark-mode

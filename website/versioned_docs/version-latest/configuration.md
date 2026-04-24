@@ -189,17 +189,35 @@ Each plugin receives:
 
 Return a single `DirtyFileAbsPath`, an array, or `undefined`.
 
-### `noteNameGenerator`
+### `changenote.nameGenerator`
 
 An optional function that generates unique filenames for changenotes created by the `change` command. By default, Cngpac generates random adjective-noun pairs (e.g. `brave-fox`).
 
 ```ts
 import { defaultGenerateNoteName } from "cngpac";
 
-noteNameGenerator: () => `note-${Date.now()}`;
+changenote: {
+  nameGenerator: () => `note-${Date.now()}`,
+},
 ```
 
 The function must return a unique string (without file extension) used as the changenote filename.
+
+### `version`
+
+An optional object for customizing the commit message and tag name created during the `version` command.
+
+```ts
+version: {
+  // Custom commit message (default: "Release {name}@{version}")
+  commitMessage: (bump) => `chore(release): ${bump.packageName}@${bump.newVersion}`,
+
+  // Custom tag name (default: "{name}@{version}")
+  tagName: (bump) => `v${bump.newVersion}`,
+}
+```
+
+Both functions receive a `VersionBump` object with properties like `packageName`, `newVersion`, `previousVersion`, and `bumpType`.
 
 ## Complete Example
 
@@ -260,6 +278,7 @@ import type {
   FormatterPlugin,
   PreStagePlugin,
   NoteNameGenerator,
+  VersionPlugin,
 } from "cngpac";
 ```
 

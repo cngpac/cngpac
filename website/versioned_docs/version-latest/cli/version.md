@@ -78,6 +78,8 @@ tag:    "my-package@1.3.0"
 push:   commit + tags to origin
 ```
 
+The commit message and tag name can be customized via the [`version`](../configuration.md#version) config option.
+
 ### 9. Publish (with `--publish`)
 
 Runs each **publisher** plugin. The built-in npm publisher runs `npm pack` followed by `npm publish`.

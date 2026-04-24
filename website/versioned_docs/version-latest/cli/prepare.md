@@ -45,7 +45,7 @@ cngpac prepare <type> [tag] [options]
 2. Reads all changenotes from `.changenotes/`
 3. Calculates the semantic version bump based on the highest `bump` field across all changenotes
 4. Applies the release type (stable or pre-release with tag)
-5. Prompts for confirmation: `Prepare my-package: 1.2.3 → 1.3.0 ?`
+5. Logs the planned version bump
 6. Writes `.changenotes/prepare.json` with the target version
 7. Runs formatter plugins on the created file
 8. Optionally commits and pushes
