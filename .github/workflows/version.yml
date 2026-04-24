@@ -23,7 +23,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --filter='cngpac'
       - name: Build package
         run: npm run build
       - name: Version
