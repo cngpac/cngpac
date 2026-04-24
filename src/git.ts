@@ -73,7 +73,7 @@ export function createGitOps(repoDir: string = ".") {
         "log",
         "--diff-filter=A",
         "--follow",
-        `--format={"hash": "%H", "subject": "%s"}`,
+        `--format={"hash": "%H", "subject": "%s", "datetime": "%aI"}`,
         filePath,
       ]);
 
@@ -82,6 +82,7 @@ export function createGitOps(repoDir: string = ".") {
       return {
         hash: log.hash,
         subject: log.subject,
+        datetime: log.datetime,
       };
     },
 

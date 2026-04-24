@@ -113,7 +113,13 @@ export function createChangelogGenerator(
       const label = getBumpLabel(bump, bumpLabels);
       lines.push(`## ${label}`);
 
-      for (const cn of changenotes) {
+      const sorted = [...changenotes].sort(
+        (a, b) =>
+          new Date(a.commit.datetime).getTime() -
+          new Date(b.commit.datetime).getTime(),
+      );
+
+      for (const cn of sorted) {
         lines.push("");
 
         const commit = cn.commit?.hash

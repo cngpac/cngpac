@@ -42,6 +42,8 @@ export interface ChangenoteCommit {
   hash: string;
   /** Commit subject for the changenote file */
   subject: string;
+  /** ISO 8601 datetime string of the commit */
+  datetime: string;
 }
 
 /** A Contributor who added/edited the changenote file */
