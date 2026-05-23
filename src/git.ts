@@ -69,20 +69,21 @@ export function createGitOps(repoDir: string = ".") {
 
     async getFileAddCommit(filePath: string): Promise<ChangenoteCommit> {
       await deepenForFile(filePath);
+      const sep = "||CNGPAC_SEP||";
       const rawLog = await git.raw([
         "log",
         "--diff-filter=A",
         "--follow",
-        `--format={"hash": "%H", "subject": "%s", "datetime": "%aI"}`,
+        `--format=%H${sep}%s${sep}%aI`,
         filePath,
       ]);
 
-      const log = JSON.parse(rawLog.trim());
+      const [hash, subject, datetime] = rawLog.trim().split(sep);
 
       return {
-        hash: log.hash,
-        subject: log.subject,
-        datetime: log.datetime,
+        hash,
+        subject,
+        datetime,
       };
     },
 
