@@ -90,13 +90,14 @@ This command:
 
 1. Reads `prepare.json` for the target version
 2. Bumps `package.json`
-3. Generates a changelog via the **changelog generator** plugin
-4. Saves it via the **changelog saver** plugin (if configured)
-5. Deletes all consumed changenote files and `prepare.json`
-6. Runs **formatters** on changed files
-7. Commits, tags, and pushes
-8. Runs **publisher** plugins (e.g., npm publish)
-9. Runs **releaser** plugins (e.g., GitHub Release)
+3. Builds the package (if `build` is configured and `--no-build` is not passed)
+4. Generates a changelog via the **changelog generator** plugin
+5. Saves it via the **changelog saver** plugin (if configured)
+6. Deletes all consumed changenote files and `prepare.json`
+7. Runs **formatters** on changed files
+8. Commits, tags, and pushes
+9. Runs **publisher** plugins (e.g., npm publish)
+10. Runs **releaser** plugins (e.g., GitHub Release)
 
 ## Plugin Architecture
 
@@ -140,6 +141,10 @@ version: {
   tagName: (bump) => `v${bump.newVersion}`,
 }
 ```
+
+### Build
+
+Compiles or bundles the package after the version is bumped in `package.json`. Configured via the `build` option as an npm script (`{ script: "build" }`), shell command (`{ command: "npm run build" }`), or custom plugin function.
 
 ---
 
