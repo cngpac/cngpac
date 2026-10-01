@@ -54,6 +54,40 @@ repository: {
 }
 ```
 
+### `build`
+
+Build configuration to compile or bundle your package immediately after updating the version in `package.json`, before changelog generation, git staging, and publishing.
+
+It supports:
+
+- An npm script configuration: `{ script: "build" }`
+- A shell command: `{ command: "npm run build" }`
+- A custom build plugin function: `({ versionBump, config, rootDir }) => Promise<void> | void`
+
+#### Running an npm script
+
+```ts
+build: {
+  script: "build";
+}
+```
+
+#### Running a shell command
+
+```ts
+build: {
+  command: "tsdown";
+}
+```
+
+#### Custom build plugin
+
+```ts
+build: async ({ versionBump, rootDir }) => {
+  // custom build logic
+};
+```
+
 ### `changelog`
 
 #### `changelog.generator`
@@ -271,6 +305,8 @@ All plugin types are exported as TypeScript types that you can implement yoursel
 
 ```ts
 import type {
+  BuildConfig,
+  BuildPlugin,
   ChangelogGenerator,
   ChangelogSaver,
   PublisherPlugin,

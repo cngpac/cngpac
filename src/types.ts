@@ -163,6 +163,37 @@ export type FormatterPlugin = {
   format: (filePaths: string[], rootDir: string) => Promise<void> | void;
 };
 
+/** Configuration for running an npm script as part of the build stage */
+export interface BuildScriptConfig {
+  /** The npm script name defined in package.json to run (e.g. "build") */
+  script: string;
+}
+
+/** Configuration for running a shell command as part of the build stage */
+export interface BuildCommandConfig {
+  /** The shell command to execute (e.g. "npm run build" or "tsdown") */
+  command: string;
+}
+
+/**
+ * A build plugin function.
+ * Called during the version command after package version is bumped.
+ * Responsible for compiling or building artifacts with the new version.
+ */
+export type BuildPlugin = (props: {
+  versionBump: VersionBump;
+  config: CngpacConfig;
+  rootDir: string;
+}) => Promise<void> | void;
+
+/**
+ * Build configuration to build the package after updating the version.
+ * Can be an npm script configuration (`{ script: "build" }`),
+ * a shell command configuration (`{ command: "npm run build" }`),
+ * or a custom build plugin function.
+ */
+export type BuildConfig = BuildScriptConfig | BuildCommandConfig | BuildPlugin;
+
 /** Configuration for Cngpac */
 export interface CngpacConfig {
   /** Relative path to the package file */
@@ -171,6 +202,10 @@ export interface CngpacConfig {
     owner: string;
     name: string;
   };
+  /**
+   * Optional build command, npm script, or plugin to run after updating the version.
+   */
+  build?: BuildConfig;
   changenote?: {
     /** Optional custom generator for changenote filenames */
     nameGenerator?: NoteNameGenerator;

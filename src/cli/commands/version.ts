@@ -13,6 +13,7 @@ import {
   readChangenotes,
   readPkg,
   readPrepareConfig,
+  runBuild,
   updatePkgVersion,
   type VersionBump,
 } from "cngpac";
@@ -20,6 +21,7 @@ import { CONFIG_FILE_NAME } from "../../const";
 import type { CommitAuthor, DirtyFileAbsPath } from "../../types";
 
 export interface VersionCommandOptions {
+  build?: boolean;
   commit?: boolean;
   tag?: boolean;
   push?: boolean;
@@ -91,6 +93,13 @@ export async function versionCommand(
     newVersion,
     bump,
   };
+
+  // Build package after updating version
+  if (options.build !== false && config.build) {
+    p.log.step("Building package...");
+    await runBuild(config, versionBump, rootDir);
+    p.log.success("Package built");
+  }
 
   // Generate changelog
   const changelog = await config.changelog.generator(

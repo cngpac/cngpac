@@ -133,7 +133,7 @@ The workflow is a four-phase sequential pipeline:
 1. **Development**: `change` → creates a changenote in `.changenotes/`
 2. **Commit**: `commit` → commits the staged changenote using its title as the message
 3. **Prepare**: `prepare` → calculates the version bump from all changenotes and writes `.changenotes/prepare.json`
-4. **Version (CI)**: `version` → applies the bump, generates changelog, publishes, and releases
+4. **Version (CI)**: `version` → applies the bump, builds the package, generates changelog, publishes, and releases
 
 ### Changenotes
 
@@ -157,15 +157,16 @@ Optional body with details.
 
 Every stage of the pipeline is extensible via `CngpacConfig`:
 
-| Plugin Type          | Signature                                                  | Purpose                         |
-| -------------------- | ---------------------------------------------------------- | ------------------------------- |
-| `ChangelogGenerator` | `(bump, changenotes[], config) => Promise<string>`         | Generate changelog markdown     |
-| `ChangelogSaver`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Save changelog in the codebase  |
-| `PublisherPlugin`    | `(props) => Promise<void> \| void`                         | Publish package (e.g., npm)     |
-| `ReleaserPlugin`     | `(props) => Promise<void> \| void`                         | Create release (e.g., GitHub)   |
-| `PreStagePlugin`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Run before git staging          |
-| `FormatterPlugin`    | `{ extensions, format(filePaths, rootDir) }`               | Format dirty files before stage |
-| `NoteNameGenerator`  | `() => string`                                             | Custom changenote file naming   |
+| Plugin Type          | Signature                                                  | Purpose                          |
+| -------------------- | ---------------------------------------------------------- | -------------------------------- |
+| `BuildPlugin`        | `(props) => Promise<void> \| void`                         | Build package after version bump |
+| `ChangelogGenerator` | `(bump, changenotes[], config) => Promise<string>`         | Generate changelog markdown      |
+| `ChangelogSaver`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Save changelog in the codebase   |
+| `PublisherPlugin`    | `(props) => Promise<void> \| void`                         | Publish package (e.g., npm)      |
+| `ReleaserPlugin`     | `(props) => Promise<void> \| void`                         | Create release (e.g., GitHub)    |
+| `PreStagePlugin`     | `(props) => Promise<DirtyFileAbsPath \| ... \| undefined>` | Run before git staging           |
+| `FormatterPlugin`    | `{ extensions, format(filePaths, rootDir) }`               | Format dirty files before stage  |
+| `NoteNameGenerator`  | `() => string`                                             | Custom changenote file naming    |
 
 ### Branded Types
 
@@ -182,6 +183,7 @@ The config file is `cngpac.config.ts` (ESM, default export). The main interface:
 interface CngpacConfig {
   package: string; // path to package.json
   repository: { owner; name }; // GitHub owner/repo
+  build?: BuildConfig; // build command, npm script, or plugin
   changelog: { generator; saver? }; // changelog plugins
   preStage?: PreStagePlugin[];
   formatters?: FormatterPlugin[];
@@ -200,6 +202,7 @@ interface CngpacConfig {
 │   ├── index.ts                # Public API re-exports
 │   ├── types.ts                # All type definitions
 │   ├── const.ts                # Constants (CONFIG_FILE_NAME, etc.)
+│   ├── build.ts                # Build runner (scripts, commands, plugins)
 │   ├── changelog.ts            # Changelog generator plugin
 │   ├── changenote.ts           # Changenote parsing, serialization, I/O
 │   ├── formatter.ts            # Formatter plugin creator
@@ -396,7 +399,7 @@ The docs site is built with **Docusaurus** and lives in `website/`.
 - **Dev server**: `pnpm run web`
 - **Docs source**: `website/docs/`
 
-**Important:** Do not touch `website/versioned_docs/` — unless you're explicitly told to do so.
+**Important:** Do not touch `website/versioned_docs/` — unless you're explicitly told to do so. The term `docs` usually refers to `website/docs/`.
 
 ### Key documentation pages
 

@@ -5,6 +5,7 @@ export interface PackageJsonOptions {
   name?: string;
   version?: string;
   repository?: { type: string; url: string } | string;
+  scripts?: Record<string, string>;
 }
 
 /** Write a package.json to the given directory */
@@ -12,10 +13,16 @@ export function writePackageJson(
   dir: string,
   options: PackageJsonOptions = {},
 ): string {
-  const { name = "test-package", version = "1.0.0", repository } = options;
+  const {
+    name = "test-package",
+    version = "1.0.0",
+    repository,
+    scripts,
+  } = options;
 
   const pkg: Record<string, unknown> = { name, version };
   if (repository) pkg.repository = repository;
+  if (scripts) pkg.scripts = scripts;
 
   const filePath = join(dir, "package.json");
   fs.writeFileSync(filePath, JSON.stringify(pkg, null, "\t"), "utf-8");

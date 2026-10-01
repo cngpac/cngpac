@@ -12,6 +12,7 @@ export default defineConfig({
 		owner: "__OWNER__",
 		name: "__REPO__",
 	},
+	build: { script: "build" },
 	changelog: {
 		generator: createChangelogGenerator({
 			githubToken: process.env.GITHUB_TOKEN!,

@@ -6,6 +6,7 @@ export function defineConfig(config: CngpacConfig): CngpacConfig {
   return config;
 }
 
+export { detectPackageManager, runBuild } from "./build";
 export { createChangelogGenerator } from "./changelog";
 export {
   consumePrepareConfig,
@@ -31,6 +32,10 @@ export { createGitHubReleaser } from "./releasers/github";
 export type { ChangelogSaverOptions } from "./saver";
 export { createChangelogSaver } from "./saver";
 export type {
+  BuildCommandConfig,
+  BuildConfig,
+  BuildPlugin,
+  BuildScriptConfig,
   BumpType,
   ChangelogGenerator,
   ChangelogSaver,

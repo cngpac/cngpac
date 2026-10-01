@@ -13,8 +13,7 @@ const program = new Command();
 program
   .name("cngpac")
   .description("A highly configurable package release manager")
-  // biome-ignore lint/style/noNonNullAssertion: <>
-  .version(process.env.VERSION!);
+  .version(process.env.VERSION ?? "0.0.0");
 
 program
   .command("init")
@@ -52,6 +51,7 @@ program
   .command("version")
   .alias("vrsn")
   .description("Apply changenotes and bump version")
+  .option("--no-build", "Skip building the package after bumping version")
   .option(
     "--commit",
     "Create a git commit with a release message after bumping versions",

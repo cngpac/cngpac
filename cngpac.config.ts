@@ -17,6 +17,7 @@ export default defineConfig({
     owner: "cngpac",
     name: "cngpac",
   },
+  build: { script: "build" },
   changelog: {
     generator: createChangelogGenerator({
       githubToken: process.env.GITHUB_TOKEN!,

@@ -44,6 +44,12 @@ vi.mock("../../src/formatter", () => ({
   formatFiles: (...args: unknown[]) => mockFormatFiles(...args),
 }));
 
+// Mock runBuild
+const mockRunBuild = vi.fn();
+vi.mock("../../src/build", () => ({
+  runBuild: (...args: unknown[]) => mockRunBuild(...args),
+}));
+
 let tmpDir: string;
 
 beforeEach(() => {
@@ -57,6 +63,7 @@ beforeEach(() => {
     (fn as ReturnType<typeof vi.fn>).mockClear();
   }
   mockFormatFiles.mockReset();
+  mockRunBuild.mockReset();
   (mockConfig.changelog.generator as ReturnType<typeof vi.fn>)
     .mockReset()
     .mockResolvedValue("# test-package@2.0.0\n\n- Test change");
@@ -332,5 +339,45 @@ describe("version command", () => {
         tagName: "v1.0.1",
       }),
     );
+  });
+
+  it("runs build stage when config.build is configured", async () => {
+    mockConfig.build = { command: "npm run build" };
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({});
+
+    expect(mockRunBuild).toHaveBeenCalledWith(
+      mockConfig,
+      expect.objectContaining({ newVersion: "1.0.1" }),
+      tmpDir,
+    );
+  });
+
+  it("skips build stage when build is false (--no-build)", async () => {
+    mockConfig.build = { command: "npm run build" };
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({ build: false });
+
+    expect(mockRunBuild).not.toHaveBeenCalled();
+  });
+
+  it("does not call build stage when config.build is undefined", async () => {
+    mockConfig.build = undefined;
+    writePackageJson(tmpDir, { version: "1.0.0" });
+    writePrepareJson(tmpDir, { newVersion: "1.0.1" });
+    writeChangenoteFile(tmpDir, { bump: "patch", title: "fix: bug" });
+
+    const versionCommand = await getVersionCommand();
+    await versionCommand({});
+
+    expect(mockRunBuild).not.toHaveBeenCalled();
   });
 });
